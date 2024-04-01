@@ -1,0 +1,22 @@
+<div *ngIf="!isDisplayCategory" class="d-flex flex-row justify-content-center align-items-center" style="height: 1000px;">
+    <button (click)="toggleHatsDisplay()" class="btn btn-secondary mx-5">
+        <img src="assets/cap.png" class="m-3" style="width:350px;">
+        <h1>Hats</h1> 
+    </button>
+
+    <button class="btn btn-secondary mx-5">
+        <img src="assets/tshirt.png" class="m-3" style="width:350px;">
+        <h1>Shirt</h1> 
+    </button>
+
+    <button class="btn btn-secondary mx-5">
+        <img src="assets/jeans.png" class="m-3" style="width:350px;">
+        <h1>Jeans</h1> 
+    </button>
+</div>
+
+<div *ngIf="!isDisplayHats" class="d-flex flex-column justify-content-center align-items-center z-0">
+    <div *ngFor="let item of items" class="d-flex flex-wrap justify-content-center gap-5 p-5">
+        <app-item [przedmiot]="item" (itemUsuniety)="itemUsuniety(item)"></app-item>
+    </div>
+</div>
