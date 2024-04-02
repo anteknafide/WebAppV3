@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ItemComponent } from './item/item.component';
 import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { provideHttpClient } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
