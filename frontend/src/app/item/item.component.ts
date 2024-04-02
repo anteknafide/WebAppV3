@@ -18,6 +18,7 @@ export class ItemComponent {
 
   constructor(private mojaUsluga :APIService) {}
 
+
   usunItem() {
     if(this.przedmiot._id && this.przedmiot._rev) {
       this.mojaUsluga.deleteItem(this.przedmiot._id, this.przedmiot._rev).subscribe(
