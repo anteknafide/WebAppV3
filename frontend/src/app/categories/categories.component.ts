@@ -8,12 +8,6 @@ import { APIService } from '../api.service';
   styleUrl: './categories.component.css'
 })
 export class CategoriesComponent {
-
-  // <isDisplayCategory> odpowiada za to czy [category] jest wyświetlany czy nie
-  isDisplayCategory = false;
-    // <isDisplayHats> odpowiada za to czy [hats] jest wyświetlany czy nie
-    isDisplayHats = true;
-
     items :Item[] = []
     nowyItem :Item = {
       name: '',
@@ -22,19 +16,7 @@ export class CategoriesComponent {
       category: 'Hat'
     }
   constructor(private mojaUsluga :APIService) {}
-    
-  toggleCategoriesDisplay()
-  {
-    this.isDisplayCategory = !this.isDisplayCategory;
-  }
-
-  toggleHatsDisplay()
-  {
-    this.isDisplayCategory = true;
-    this.isDisplayHats = !this.isDisplayHats;
-  }
-
-
+  
   dodajItem() {
   
     // debugger

@@ -27,14 +27,16 @@
 <div *ngIf="adminDisplay" class="container bg-dark rounded-4 position-absolute top-50 start-50 translate-middle z-1" style="width: 500px;">
   <button (click)="toggleAdminDisplay()" class="btn btn-dark mt-2"><i class="bi bi-x-circle text-light fs-4"></i></button>
   <div class="d-flex flex-column justify-content-center align-items-center gap-3">
-  <form> 
-      <input type="text" class="form-control mt-3" id="name" placeholder="name" [(ngModel)]="nowyItem.name">
+  <form name="formDodawanie"> 
+      <input type="text" name="name" id="name" [(ngModel)]="nowyItem.name" placeholder="name" class="form-control">
+
+      <!-- <input type="text" class="form-control mt-3" id="name" placeholder="name" [(ngModel)]="nowyItem.name"> -->
       <div class="mb-3">
-        <textarea class="form-control"  placeholder="description" id="description" rows="3" [(ngModel)]="nowyItem.description"></textarea>
+        <textarea name="description" class="form-control"  placeholder="description" id="description" rows="3" [(ngModel)]="nowyItem.description"></textarea>
       </div>
       <label class="text-light">
         Price
-      <input type="number" class="form-control " id="price" [(ngModel)]="nowyItem.price">
+      <input name="price" type="number" class="form-control " id="price" [(ngModel)]="nowyItem.price">
     </label>
       <select name="category" id="category" [(ngModel)]="nowyItem.category">
         <option value="T-shirt">T-shirt</option>
@@ -76,26 +78,7 @@
     </div>
   </div>
 
-
-
-<div *ngIf="!isDisplayCategory" class="d-flex flex-row justify-content-center align-items-center" style="height: 1000px;">
-    <button (click)="toggleHatsDisplay()" class="btn btn-secondary mx-5">
-        <img src="assets/cap.png" class="m-3" style="width:350px;">
-        <h1>Hats</h1> 
-    </button>
-
-    <button class="btn btn-secondary mx-5">
-        <img src="assets/tshirt.png" class="m-3" style="width:350px;">
-        <h1>Shirt</h1> 
-    </button>
-
-    <button class="btn btn-secondary mx-5">
-        <img src="assets/jeans.png" class="m-3" style="width:350px;">
-        <h1>Jeans</h1> 
-    </button>
-</div>
-
-<div *ngIf="!isDisplayHats" class="d-flex flex-row flex-wrap  justify-content-center align-items-center z-0">
+<div class="d-flex flex-row flex-wrap  justify-content-center align-items-center z-0">
    
     <div *ngFor="let item of items" class="d-flex flex-wrap justify-content-center gap-5 p-5">
         <app-item [przedmiot]="item" (itemUsuniety)="itemUsuniety(item)"></app-item>
