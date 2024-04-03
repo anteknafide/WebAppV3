@@ -2,11 +2,43 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from './item.model';
 import { APIService } from '../api.service';
 
+export const cartItems: Item[] = [];
+
+//dodaje tylko przy otwartym koszyku, i nadpisuje
+export function wypelnijKoszyk(){
+  
+  console.log(`wypelniam koszyk ${cartItems.length} itemami`)
+
+  cartItems.forEach(przedmiot => {
+    //trzeba clearowac diva cartitem, ale jak?
+    const cartItem = document.createElement('div')
+
+    const cartItemInfo = document.createElement('p')
+    cartItemInfo.textContent = `${przedmiot.name} | ${przedmiot.price} zł`
+    cartItem.appendChild(cartItemInfo);
+
+    //przycisk usuwania - nie ma funkcjonalnosci
+    const cartItemDeleteButton = document.createElement('button')
+    cartItemDeleteButton.textContent = `usun`
+    cartItem.appendChild(cartItemDeleteButton);
+
+    document.getElementById('cartContent')?.appendChild(cartItem)
+
+    //zrobic by cena sie updatowala
+    // let suma = 0
+    // cartItems.forEach(element => {
+    //   suma =+ element.price
+    // });
+    // document.getElementById('cartPrice')!.textContent = `Price: ${suma} zł`
+  });
+}
+
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrl: './item.component.css'
 })
+
 export class ItemComponent {
   @Input() przedmiot :Item
   @Output() itemUsuniety = new EventEmitter<Item>()
@@ -51,4 +83,14 @@ export class ItemComponent {
     )
 
   }
+
+  dodajDoKoszyka(){
+    cartItems.push(this.przedmiot)
+    console.log(`dodaje do koszyka item, teraz jest ${cartItems.length} itemow`)
+
+    wypelnijKoszyk()
+  }
+
+
+
 }

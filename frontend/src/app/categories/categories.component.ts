@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Item } from '../item/item.model';
 import { APIService } from '../api.service';
 
+import { cartItems } from '../item/item.component';
+import { wypelnijKoszyk } from '../item/item.component';
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -50,18 +53,18 @@ export class CategoriesComponent {
     // <isDisplayLogin> odpowiada za to czy [login from] jest wyświetlany czy nie
     isDisplayLogin = true;
     // <isDisplayLogin> odpowiada za to czy [checkout from] jest wyświetlany czy nie
-  isDisplayCheckout = true;
-  userLoggedIn=true;
-  adminDisplay=false;
-  singupUsers :any[] = [];
-  loginObj:any = {
-    username: '',
-    password: ''
-  };
-  // signupObj:any = {
-  //   username: '',
-  //   password: ''
-  // };
+    isDisplayCheckout = true;
+    userLoggedIn=true;
+    adminDisplay=false;
+    singupUsers :any[] = [];
+    loginObj:any = {
+      username: '',
+      password: ''
+    };
+    // signupObj:any = {
+    //   username: '',
+    //   password: ''
+    // };
 
   adminObj:any = {
     username: 'admin',
@@ -75,9 +78,9 @@ export class CategoriesComponent {
 
   toggleCheckoutDisplay()
   {
+    wypelnijKoszyk();
     this.isDisplayCheckout = !this.isDisplayCheckout;
   }
-
 
   onLogin()
   {
@@ -103,6 +106,7 @@ export class CategoriesComponent {
   toggleAdminDisplay(){
     this.adminDisplay=!this.adminDisplay;
   }
+  //siNG up jaki noop to pisal??!!??!?!
   onSingUp()
   {
     // this.signupObj=this.loginObj
