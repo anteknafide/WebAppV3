@@ -1,10 +1,26 @@
 <div class="card text-bg-secondary mx-5" style="width: 400px;">
     <img src="assets/cap.png" class="card-img-top mx-4" style="width: 350px;">
-    <div class="card-body">
+    
+    <div class="card-body" *ngIf="!trybEdycji">
       <h5 class="card-title">{{przedmiot.name}}</h5>
       <p class="card-text">{{przedmiot.description}}</p>
       <p>{{przedmiot.category}}</p>
       <p>{{przedmiot.price}} zł</p>
+
       <a href="#" class="btn btn-primary" (click)="dodajDoKoszyka()">Add to cart</a>
+      <button *ngIf="innerAdminDisplay" (click)="usunItem()">Usuń</button>
+      <button *ngIf="innerAdminDisplay" (click)="edytujItem()">Edytuj</button>
     </div>
+
+    <div class="card-body" *ngIf="trybEdycji">
+      <input type="text" [(ngModel)]="przedmiot.name" placeholder="nazwa">
+      <input type="text" [(ngModel)]="przedmiot.description" placeholder="opis">
+      <p>{{przedmiot.category}}</p>
+      <input type="number" [(ngModel)]="przedmiot.price" placeholder="cena">
+
+      <a href="#" class="btn btn-primary" (click)="dodajDoKoszyka()">Add to cart</a>
+      <button *ngIf="innerAdminDisplay" (click)="anulujEdycje()">Anuluj</button>
+      <button *ngIf="innerAdminDisplay" (click)="zapiszEdycje()">Zapisz</button>
+    </div>
+
 </div>

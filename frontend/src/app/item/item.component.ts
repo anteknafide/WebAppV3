@@ -2,17 +2,25 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from './item.model';
 import { APIService } from '../api.service';
 
-export const cartItems: Item[] = [];
+import { adminDisplay } from '../categories/categories.component';
+
+// export const cartItems: Item[] = [];
+var cartItems: Item[] = [];
 
 //dodaje tylko przy otwartym koszyku, i nadpisuje
 export function wypelnijKoszyk(){
-  
+  const container = document.getElementById("cartContent");
+  while (container?.firstChild) {
+    container?.removeChild(container?.firstChild);
+}
   console.log(`wypelniam koszyk ${cartItems.length} itemami`)
+  let suma = 0
 
   cartItems.forEach(przedmiot => {
-    //trzeba clearowac diva cartitem, ale jak?
+    //tworzenie cartItemu
     const cartItem = document.createElement('div')
-
+    
+    //cartItemContent
     const cartItemInfo = document.createElement('p')
     cartItemInfo.textContent = `${przedmiot.name} | ${przedmiot.price} zł`
     cartItem.appendChild(cartItemInfo);
@@ -21,16 +29,14 @@ export function wypelnijKoszyk(){
     const cartItemDeleteButton = document.createElement('button')
     cartItemDeleteButton.textContent = `usun`
     cartItem.appendChild(cartItemDeleteButton);
+    
+    //wypelnianie koszyka cartItemem
+    container?.appendChild(cartItem)
 
-    document.getElementById('cartContent')?.appendChild(cartItem)
-
-    //zrobic by cena sie updatowala
-    // let suma = 0
-    // cartItems.forEach(element => {
-    //   suma =+ element.price
-    // });
-    // document.getElementById('cartPrice')!.textContent = `Price: ${suma} zł`
+    //updateowanie ceny
+    suma =+ przedmiot.price
   });
+  //document.getElementById('cartPrice')!.textContent = `Price: ${suma} zł`
 }
 
 @Component({
@@ -44,12 +50,12 @@ export class ItemComponent {
   @Output() itemUsuniety = new EventEmitter<Item>()
   @Output() itemZaktualizowany = new EventEmitter()
 
+  innerAdminDisplay = adminDisplay
   itemPierwotny :Item
 
   trybEdycji = false
 
   constructor(private mojaUsluga :APIService) {}
-
 
   usunItem() {
     if(this.przedmiot._id && this.przedmiot._rev) {
@@ -67,10 +73,12 @@ export class ItemComponent {
     this.itemPierwotny = structuredClone(this.przedmiot)
     this.trybEdycji = true
   }
+
   anulujEdycje() {
     this.przedmiot = this.itemPierwotny
     this.trybEdycji = false
   }
+
   zapiszEdycje() {
     this.mojaUsluga.updateItem(this.przedmiot).subscribe(
       (res) => {

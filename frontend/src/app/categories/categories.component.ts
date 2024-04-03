@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { Item } from '../item/item.model';
 import { APIService } from '../api.service';
 
-import { cartItems } from '../item/item.component';
+// import { cartItems } from '../item/item.component';
 import { wypelnijKoszyk } from '../item/item.component';
+
+export var adminDisplay=true;
 
 @Component({
   selector: 'app-categories',
@@ -76,10 +78,11 @@ export class CategoriesComponent {
     this.isDisplayLogin = !this.isDisplayLogin;
   }
 
+  //naprawic- bo koszyk nie chce sie wczytac po otwarciu koszyka
   toggleCheckoutDisplay()
   {
-    wypelnijKoszyk();
     this.isDisplayCheckout = !this.isDisplayCheckout;
+    wypelnijKoszyk();
   }
 
   onLogin()
@@ -90,10 +93,12 @@ export class CategoriesComponent {
       if(userExist){
         this.userLoggedIn=true;
         alert('User logged(locked) in')
+        this.toggleLoginDisplay()
       }else{
         alert('Error')
       }
   }
+
   onLogout(){
     alert('user logged out')
     // localStorage.clear();
@@ -102,10 +107,13 @@ export class CategoriesComponent {
     //   password:''
     // }
     this.userLoggedIn=false;
+    adminDisplay = false;
   }
+  
   toggleAdminDisplay(){
-    this.adminDisplay=!this.adminDisplay;
+    adminDisplay=!adminDisplay;
   }
+
   //siNG up jaki noop to pisal??!!??!?!
   onSingUp()
   {
