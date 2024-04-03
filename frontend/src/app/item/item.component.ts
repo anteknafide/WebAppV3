@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from './item.model';
 import { APIService } from '../api.service';
 
-import { adminDisplay } from '../categories/categories.component';
+//import { adminDisplay } from '../categories/categories.component';
 
 // export const cartItems: Item[] = [];
 var cartItems: Item[] = [];
@@ -12,7 +12,7 @@ export function wypelnijKoszyk(){
   const container = document.getElementById("cartContent");
   while (container?.firstChild) {
     container?.removeChild(container?.firstChild);
-}
+  }
   console.log(`wypelniam koszyk ${cartItems.length} itemami`)
   let suma = 0
 
@@ -50,7 +50,7 @@ export class ItemComponent {
   @Output() itemUsuniety = new EventEmitter<Item>()
   @Output() itemZaktualizowany = new EventEmitter()
 
-  innerAdminDisplay = adminDisplay
+  innerAdminDisplay = true
   itemPierwotny :Item
 
   trybEdycji = false

@@ -5,7 +5,8 @@ import { APIService } from '../api.service';
 // import { cartItems } from '../item/item.component';
 import { wypelnijKoszyk } from '../item/item.component';
 
-export var adminDisplay=true;
+//export var adminDisplay = !false;
+
 
 @Component({
   selector: 'app-categories',
@@ -13,6 +14,7 @@ export var adminDisplay=true;
   styleUrl: './categories.component.css'
 })
 export class CategoriesComponent {
+  
     items :Item[] = []
     nowyItem :Item = {
       name: '',
@@ -107,11 +109,11 @@ export class CategoriesComponent {
     //   password:''
     // }
     this.userLoggedIn=false;
-    adminDisplay = false;
+    this.adminDisplay = false;
   }
   
   toggleAdminDisplay(){
-    adminDisplay=!adminDisplay;
+    this.adminDisplay=!this.adminDisplay;
   }
 
   //siNG up jaki noop to pisal??!!??!?!
