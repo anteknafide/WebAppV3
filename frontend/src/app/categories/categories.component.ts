@@ -3,7 +3,8 @@ import { Item } from '../item/item.model';
 import { APIService } from '../api.service';
 
 // import { cartItems } from '../item/item.component';
-import { wypelnijKoszyk } from '../item/item.component';
+import { WypelnijKoszyk } from '../item/item.component';
+import { WyczyscKoszyk } from '../item/item.component';
 
 //export var adminDisplay = !false;
 
@@ -25,7 +26,21 @@ export class CategoriesComponent {
   constructor(private mojaUsluga :APIService) {}
   
   dodajItem() {
-  
+    
+    //to tez moze byc tam gdzie sie wczytuje z bazy na strone, bedzie po patrzec na category po value napisu i zmieniac src na podstawie tego
+    // let selectedCategory = (<HTMLSelectElement>document.getElementById('organization')).value;
+    // switch (selectedCategory){
+    //   case "Hat":
+    //     this.nowyItem.category = "Hat"
+    //     break;
+    //   case "T-shirt":
+    //     this.nowyItem.category = "T-shirt"
+    //     break;
+    //   case "Pants":
+    //       this.nowyItem.category = "Pants"
+    //       break;
+    // }
+
     // debugger
     this.mojaUsluga.addNewItem(this.nowyItem).subscribe(
       (res) => {
@@ -83,8 +98,12 @@ export class CategoriesComponent {
   //naprawic- bo koszyk nie chce sie wczytac po otwarciu koszyka
   toggleCheckoutDisplay()
   {
-    this.isDisplayCheckout = !this.isDisplayCheckout;
-    wypelnijKoszyk();
+    this.isDisplayCheckout = !this.isDisplayCheckout
+    WypelnijKoszyk()
+  }
+
+  ClearCart(){
+    WyczyscKoszyk()
   }
 
   onLogin()

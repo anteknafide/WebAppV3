@@ -2,13 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from './item.model';
 import { APIService } from '../api.service';
 
-//import { adminDisplay } from '../categories/categories.component';
-
 // export const cartItems: Item[] = [];
 var cartItems: Item[] = [];
 
 //dodaje tylko przy otwartym koszyku, i nadpisuje
-export function wypelnijKoszyk(){
+export function WypelnijKoszyk(){
   const container = document.getElementById("cartContent");
   while (container?.firstChild) {
     container?.removeChild(container?.firstChild);
@@ -24,19 +22,27 @@ export function wypelnijKoszyk(){
     const cartItemInfo = document.createElement('p')
     cartItemInfo.textContent = `${przedmiot.name} | ${przedmiot.price} zł`
     cartItem.appendChild(cartItemInfo);
-
-    //przycisk usuwania - nie ma funkcjonalnosci
-    const cartItemDeleteButton = document.createElement('button')
-    cartItemDeleteButton.textContent = `usun`
-    cartItem.appendChild(cartItemDeleteButton);
     
     //wypelnianie koszyka cartItemem
     container?.appendChild(cartItem)
 
-    //updateowanie ceny
-    suma =+ przedmiot.price
+    UpdateCeny()
   });
-  //document.getElementById('cartPrice')!.textContent = `Price: ${suma} zł`
+}
+
+export function WyczyscKoszyk(){
+  cartItems = [];
+  WypelnijKoszyk()
+  UpdateCeny()
+}
+
+export function UpdateCeny(){
+  let suma:number = 0
+  cartItems.forEach(przedmiot => {
+    //wyswietla sie tylko cena ostatniego produktu, bo przedmiot.price to string?
+    suma =+ przedmiot.price
+  })
+  document.getElementById('cartPrice')!.textContent = `Price: ${suma} zł`
 }
 
 @Component({
@@ -96,9 +102,6 @@ export class ItemComponent {
     cartItems.push(this.przedmiot)
     console.log(`dodaje do koszyka item, teraz jest ${cartItems.length} itemow`)
 
-    wypelnijKoszyk()
+    WypelnijKoszyk()
   }
-
-
-
 }
