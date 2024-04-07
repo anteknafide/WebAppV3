@@ -54,8 +54,8 @@ app.post('/api/v1/clothingshop', (req, res) => {
     res.status(200).json({message: 'Dokument dodany'})
   })
 })
-app.delete(`/api/v1/clotingshop/:id/:rev`, (req, res) => {
-  const id = req.params.id
+app.delete(`/api/v1/clothingshop/:id/:rev`, (req, res) => {
+   const id = req.params.id
   const rev = req.params.rev
 
   DB.destroy(id, rev, (err, body) => {
