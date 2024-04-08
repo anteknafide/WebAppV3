@@ -2,18 +2,20 @@ import { Component } from '@angular/core';
 import { Item } from '../item/item.model';
 import { APIService } from '../api.service';
 
+// import { cartItems } from '../item/item.component';
+import { WypelnijKoszyk } from '../item/item.component';
+import { WyczyscKoszyk } from '../item/item.component';
+
+//export var adminDisplay = !false;
+
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'
 })
 export class CategoriesComponent {
-
-  // <isDisplayCategory> odpowiada za to czy [category] jest wyświetlany czy nie
-  isDisplayCategory = false;
-    // <isDisplayHats> odpowiada za to czy [hats] jest wyświetlany czy nie
-    isDisplayHats = true;
-
+  
     items :Item[] = []
     nowyItem :Item = {
       name: '',
@@ -22,21 +24,23 @@ export class CategoriesComponent {
       category: 'Hat'
     }
   constructor(private mojaUsluga :APIService) {}
-    
-  toggleCategoriesDisplay()
-  {
-    this.isDisplayCategory = !this.isDisplayCategory;
-  }
-
-  toggleHatsDisplay()
-  {
-    this.isDisplayCategory = true;
-    this.isDisplayHats = !this.isDisplayHats;
-  }
-
-
-  dodajItem() {
   
+  dodajItem() {
+    
+    //to tez moze byc tam gdzie sie wczytuje z bazy na strone, bedzie po patrzec na category po value napisu i zmieniac src na podstawie tego
+    // let selectedCategory = (<HTMLSelectElement>document.getElementById('organization')).value;
+    // switch (selectedCategory){
+    //   case "Hat":
+    //     this.nowyItem.category = "Hat"
+    //     break;
+    //   case "T-shirt":
+    //     this.nowyItem.category = "T-shirt"
+    //     break;
+    //   case "Pants":
+    //       this.nowyItem.category = "Pants"
+    //       break;
+    // }
+
     // debugger
     this.mojaUsluga.addNewItem(this.nowyItem).subscribe(
       (res) => {
@@ -68,18 +72,18 @@ export class CategoriesComponent {
     // <isDisplayLogin> odpowiada za to czy [login from] jest wyświetlany czy nie
     isDisplayLogin = true;
     // <isDisplayLogin> odpowiada za to czy [checkout from] jest wyświetlany czy nie
-  isDisplayCheckout = true;
-  userLoggedIn=true;
-  adminDisplay=false;
-  singupUsers :any[] = [];
-  loginObj:any = {
-    username: '',
-    password: ''
-  };
-  // signupObj:any = {
-  //   username: '',
-  //   password: ''
-  // };
+    isDisplayCheckout = true;
+    userLoggedIn=true;
+    adminDisplay=false;
+    singupUsers :any[] = [];
+    loginObj:any = {
+      username: '',
+      password: ''
+    };
+    // signupObj:any = {
+    //   username: '',
+    //   password: ''
+    // };
 
   adminObj:any = {
     username: 'admin',
@@ -91,11 +95,16 @@ export class CategoriesComponent {
     this.isDisplayLogin = !this.isDisplayLogin;
   }
 
+  //naprawic- bo koszyk nie chce sie wczytac po otwarciu koszyka
   toggleCheckoutDisplay()
   {
-    this.isDisplayCheckout = !this.isDisplayCheckout;
+    this.isDisplayCheckout = !this.isDisplayCheckout
+    WypelnijKoszyk()
   }
 
+  ClearCart(){
+    WyczyscKoszyk()
+  }
 
   onLogin()
   {
@@ -105,10 +114,12 @@ export class CategoriesComponent {
       if(userExist){
         this.userLoggedIn=true;
         alert('User logged(locked) in')
+        this.toggleLoginDisplay()
       }else{
         alert('Error')
       }
   }
+
   onLogout(){
     alert('user logged out')
     // localStorage.clear();
@@ -117,10 +128,14 @@ export class CategoriesComponent {
     //   password:''
     // }
     this.userLoggedIn=false;
+    this.adminDisplay = false;
   }
+  
   toggleAdminDisplay(){
     this.adminDisplay=!this.adminDisplay;
   }
+
+  //siNG up jaki noop to pisal??!!??!?!
   onSingUp()
   {
     // this.signupObj=this.loginObj
