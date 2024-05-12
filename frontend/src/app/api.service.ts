@@ -8,7 +8,6 @@ import { Item } from './item/item.model';
 const API_URL = "http://localhost:5555/api/v1"
 
 const mojeNaglowkiHTTP = new HttpHeaders({
-  'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*'
 })
 
