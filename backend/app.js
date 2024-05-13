@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 
 const express = require('express')
 const cors = require('cors')
+ 
+
 
 const DB_NAME = 'clothingshop'
 const PORT = 5555
@@ -14,6 +16,38 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+const multer = require('multer')
+const jwt = require('jsonwebtoken')
+const argon = require('argon2')
+
+const UPLOAD_FOLDER = 'uploads'
+const JWT_SEKRET = 'sekret'
+
+const IUser = require('./user.interface')
+
+// Udostępnienie całego folderu `uploads`
+app.use(`/${UPLOAD_FOLDER}`, express.static(`${UPLOAD_FOLDER}`))
+
+const ustawieniaZapisu = multer.diskStorage({
+  destination: function (req, file, fz) {
+    fz(null, UPLOAD_FOLDER)
+  },
+  filename: function(req, file, fz) {
+    fz(null, `${Date.now()}_${file.originalname}`)
+  },
+})
+
+const upload = multer({
+  storage: ustawieniaZapisu,
+  dest: `${UPLOAD_FOLDER}/`,
+  fileFilter: (req, file, fz) => {
+    if(file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+      fz(null, true)
+    } else {
+      fz(new MediaError('Nieprawidłowy format pliku'))
+    }
+  }
+})
 const DB = nano.use(DB_NAME)
 
 function wypisz_blad(metoda, url, status, blad) {
@@ -118,6 +152,7 @@ app.post(`/api/v1/register`, async (req, res) => {
   const {login, password} = req.body
   
   try {
+    
     const hashPassword = await argon.hash(password)
 
     const nowyUser = {login, password: hashPassword}
