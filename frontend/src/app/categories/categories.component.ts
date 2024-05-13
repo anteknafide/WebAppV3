@@ -77,9 +77,8 @@ export class CategoriesComponent {
     )
   }
 
-    // <isDisplayLogin> odpowiada za to czy [checkout form] jest wyświetlany czy nie
-    // isDisplayLogin:boolean = true;
-    // isDisplaySignup:boolean = true;
+    isDisplayLogin:boolean = true;
+    isDisplaySignup:boolean = true;
 
     isDisplayCheckout = true;
     userLoggedIn=true;
@@ -99,15 +98,15 @@ export class CategoriesComponent {
     password: 'admin'
   };
 
-  // toggleLoginDisplay()
-  // {
-  //   this.isDisplayLogin = !this.isDisplayLogin;
-  // }
+ toggleLoginDisplay()
+ {
+   this.isDisplayLogin = !this.isDisplayLogin;
+ }
 
-  // toggleSignupDisplay()
-  // {
-  //   this.isDisplaySignup = !this.isDisplaySignup;
-  // }
+  toggleSignupDisplay()
+  {
+     this.isDisplaySignup = !this.isDisplaySignup;
+  }
 
   //naprawic- bo koszyk nie chce sie wczytac po otwarciu koszyka
   toggleCheckoutDisplay()
