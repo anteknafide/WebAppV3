@@ -6,8 +6,16 @@ import { APIService } from '../api.service';
 import { WypelnijKoszyk } from '../item/item.component';
 import { WyczyscKoszyk } from '../item/item.component';
 
-//export var adminDisplay = !false;
+var isDisplayLogin:boolean = true;
+var isDisplaySignup:boolean = true;
 
+export function toggleLoginDisplay(){
+  isDisplayLogin = !isDisplayLogin;
+}
+
+export function toggleSignupDisplay(){
+  isDisplaySignup = !isDisplaySignup;
+}
 
 @Component({
   selector: 'app-categories',
@@ -15,7 +23,7 @@ import { WyczyscKoszyk } from '../item/item.component';
   styleUrl: './categories.component.css'
 })
 export class CategoriesComponent {
-  
+
     items :Item[] = []
     nowyItem :Item = {
       name: '',
@@ -69,9 +77,10 @@ export class CategoriesComponent {
     )
   }
 
-    // <isDisplayLogin> odpowiada za to czy [login from] jest wyświetlany czy nie
-    isDisplayLogin = true;
-    // <isDisplayLogin> odpowiada za to czy [checkout from] jest wyświetlany czy nie
+    // <isDisplayLogin> odpowiada za to czy [checkout form] jest wyświetlany czy nie
+    // isDisplayLogin:boolean = true;
+    // isDisplaySignup:boolean = true;
+
     isDisplayCheckout = true;
     userLoggedIn=true;
     adminDisplay=false;
@@ -90,10 +99,15 @@ export class CategoriesComponent {
     password: 'admin'
   };
 
-  toggleLoginDisplay()
-  {
-    this.isDisplayLogin = !this.isDisplayLogin;
-  }
+  // toggleLoginDisplay()
+  // {
+  //   this.isDisplayLogin = !this.isDisplayLogin;
+  // }
+
+  // toggleSignupDisplay()
+  // {
+  //   this.isDisplaySignup = !this.isDisplaySignup;
+  // }
 
   //naprawic- bo koszyk nie chce sie wczytac po otwarciu koszyka
   toggleCheckoutDisplay()
@@ -114,7 +128,7 @@ export class CategoriesComponent {
       if(userExist){
         this.userLoggedIn=true;
         alert('User logged(locked) in')
-        this.toggleLoginDisplay()
+        toggleLoginDisplay()
       }else{
         alert('Error')
       }

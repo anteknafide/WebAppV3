@@ -1,0 +1,11 @@
+.form-kontener {
+    width: 50%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .slabe-haslo { accent-color: red; }
+  .srednie-haslo { accent-color: yellow; }
+  .silne-haslo { accent-color: green; }
+  
+  

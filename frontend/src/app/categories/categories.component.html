@@ -9,8 +9,11 @@
 
         <!-- PRZYCISKI -->
         <div class="d-lg-flex justify-content-lg-end align-items-center gap-4">
-            <button (click)="toggleAdminDisplay()" *ngIf="userLoggedIn" class="btn btn-danger rounded-4 px-3 text-white">Admin panel</button>            
-            <button *ngIf="!userLoggedIn" (click)="toggleLoginDisplay()" class="btn btn-secondary rounded-4 px-3 text-black">Log in</button>
+            <button (click)="toggleAdminDisplay()" *ngIf="userLoggedIn" class="btn btn-danger rounded-4 px-3 text-white">Admin panel</button>             
+
+            <a *ngIf="!userLoggedIn" (click)="toggleLoginDisplay()" class="btn btn-secondary rounded-4 px-3 text-black">Logowanie</a>
+            <a *ngIf="!userLoggedIn" (click)="toggleSignupDisplay()" class="btn btn-secondary rounded-4 px-3 text-black">Rejestracja</a>
+
             <button *ngIf="userLoggedIn" (click)="onLogout()" class="btn btn-secondary rounded-4 px-3 text-black">Log out</button>
             <button (click)="toggleCheckoutDisplay()" class="btn btn-secondary rounded-10 px-3"><img src="assets/shopping-cart.png" alt="Cart" width="30"></button>
         </div>
@@ -19,15 +22,13 @@
 </nav>
 
 <!-- LOGIN -->
-<div *ngIf="!isDisplayLogin" class="container bg-dark rounded-4 position-absolute top-50 start-50 translate-middle z-1" style="width: 500px;">
-    <button (click)="toggleLoginDisplay()" class="btn btn-dark mt-2"><i class="bi bi-x-circle text-light fs-4"></i></button>
-    <div class="d-flex flex-column justify-content-center align-items-center gap-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name" [(ngModel)]="loginObj.username">
-        <input type="text" class="form-control" type="password" id="floatingPassword" placeholder="Password" [(ngModel)]="loginObj.password">
-        <!-- <a class="link" href="">Forgot password?</a> -->
-        <button type="submit" (click)="onLogin()" class="btn btn-secondary px-5">Log in</button>
-        <!-- <button type="submit" (click)="onSingUp()" class="btn btn-secondary mb-3">Sign in</button> -->
-    </div>
+<div *ngIf="!isDisplayLogin">
+    <app-user-login></app-user-login>
+</div>
+
+<!-- REJESTRACJA -->
+<div *ngIf="!isDisplaySignup">
+  <app-user-register></app-user-register>
 </div>
 
 <!-- ADMIN BUTTON -->
