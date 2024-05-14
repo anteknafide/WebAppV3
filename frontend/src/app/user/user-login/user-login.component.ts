@@ -2,7 +2,6 @@ import { Component} from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 
-//nwm dlaczego nie chce zimportowac, przez to przycisk "x" nie chce działać i trzeba zamykać przez przycisk logowania
 import { toggleLoginDisplay } from '../../categories/categories.component';
 
 @Component({
@@ -30,12 +29,17 @@ export class UserLoginComponent {
     this.autoryzacja.loginUser(daneLogowania).subscribe(
       () => {
         this.trasownik.navigate(['/'])
-        console.log("Urzytkownik pomyslnie zalogowany: " + this.login + " - " + this.password);
+        console.log("Użżżżżżżżżytkownik pomyslnie zalogowany: " + this.login + " - " + this.password);
         toggleLoginDisplay();
       },
       (e) => {
         console.error(e)
       }
     )
+  }
+
+  zmienDisplay()
+  {
+    toggleLoginDisplay();
   }
 }

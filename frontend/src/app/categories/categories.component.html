@@ -21,8 +21,8 @@
     </div>
 </nav>
 
-<div *ngIf="!isDisplayLogin">
-    <app-user-login></app-user-login>
+<div>
+    <app-user-login *ngIf="!isDisplayLogin"></app-user-login>
 </div>
 
 <!-- REJESTRACJA -->

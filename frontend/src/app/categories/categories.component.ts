@@ -10,8 +10,11 @@ var isDisplayLogin:boolean = true;
 var isDisplaySignup:boolean = true;
 
 export function toggleLoginDisplay(){
+  console.log(isDisplayLogin);
   isDisplayLogin = !isDisplayLogin;
   console.log("Zmieniono display");
+  console.log(isDisplayLogin);
+  
 }
 
 export function toggleSignupDisplay(){
