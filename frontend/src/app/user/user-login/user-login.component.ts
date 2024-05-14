@@ -10,14 +10,17 @@ import { toggleLoginDisplay } from '../../categories/categories.component';
   templateUrl: './user-login.component.html',
   styleUrl: './user-login.component.css'
 })
+
 export class UserLoginComponent {
   login :string
   password :string
+
 
   constructor(
     private autoryzacja :AuthService,
     private trasownik :Router
   ) {}
+
 
   zaloguj() {
     const daneLogowania = {
@@ -27,6 +30,8 @@ export class UserLoginComponent {
     this.autoryzacja.loginUser(daneLogowania).subscribe(
       () => {
         this.trasownik.navigate(['/'])
+        console.log("Urzytkownik pomyslnie zalogowany: " + this.login + " - " + this.password);
+        toggleLoginDisplay();
       },
       (e) => {
         console.error(e)

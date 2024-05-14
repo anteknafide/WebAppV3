@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from '../item/item.model';
 import { APIService } from '../api.service';
 
@@ -11,6 +11,7 @@ var isDisplaySignup:boolean = true;
 
 export function toggleLoginDisplay(){
   isDisplayLogin = !isDisplayLogin;
+  console.log("Zmieniono display");
 }
 
 export function toggleSignupDisplay(){
@@ -81,7 +82,7 @@ export class CategoriesComponent {
     isDisplaySignup:boolean = true;
 
     isDisplayCheckout = true;
-    userLoggedIn=true;
+    userLoggedIn=false;
     adminDisplay=false;
     singupUsers :any[] = [];
     loginObj:any = {

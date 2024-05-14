@@ -29,6 +29,7 @@ export class AuthService {
       tap((response) => {
         this.store.dispatch(login())
         this.zapiszToken((response as any).token)
+        
       })
     )
   }

@@ -56,7 +56,7 @@ export class ItemComponent {
   @Output() itemUsuniety = new EventEmitter<Item>()
   @Output() itemZaktualizowany = new EventEmitter()
 
-  innerAdminDisplay = true
+  innerAdminDisplay = false
   itemPierwotny :Item
 
   trybEdycji = false

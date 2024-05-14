@@ -27,9 +27,7 @@ export class UserRegisterComponent {
   ) {}
 
   zarejestruj() {
-    console.log("dziala");
     if(this.nowyUser.password === this.password2) {
-      console.log("dzialaif");
       this.autoryzacja.registerUser(this.nowyUser).subscribe(
         () => {
           this.trasownik.navigate(['/logowanie'])
