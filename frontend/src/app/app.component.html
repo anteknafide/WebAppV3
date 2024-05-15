@@ -1,4 +1,20 @@
+<!--
 <div class="container-flex">
-    <!-- <app-header></app-header> -->
     <app-categories></app-categories>
 </div>
+-->
+
+<nav>
+    <ng-template [ngIf] = "!(czyZalogowany$ | async)">
+      <a class="btn btn-primary" routerLink="/rejestracja">Rejestracja</a>
+      <a class="btn btn-primary" routerLink="/logowanie">Logowanie</a>
+    </ng-template>
+  
+    <ng-template [ngIf]="(czyZalogowany$ | async)">
+      <a class="btn btn-primary" routerLink="/wylogowanie">Wyloguj</a>
+    </ng-template>
+  
+    <a class="btn btn-primary" routerLink="/categories">Galeria</a>
+  </nav>
+  
+  <router-outlet></router-outlet>

@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from './item.model';
 import { APIService } from '../api.service';
+import { Store } from '@ngrx/store';
+
+import { selektorCzyZalogowany } from '../ng-store/user.selectors';
+import { Observable } from 'rxjs';
+import { TmplAstInteractionDeferredTrigger } from '@angular/compiler';
 
 // export const cartItems: Item[] = [];
 var cartItems: Item[] = [];
@@ -55,13 +60,18 @@ export class ItemComponent {
   @Input() przedmiot :Item
   @Output() itemUsuniety = new EventEmitter<Item>()
   @Output() itemZaktualizowany = new EventEmitter()
+  
+  czyLogged$ :Observable<boolean>
+  constructor(private mojaUsluga :APIService, private magazyn :Store) {
+  }
 
-  innerAdminDisplay = false
+  
+
+  innerAdminDisplay = false;
   itemPierwotny :Item
 
   trybEdycji = false
 
-  constructor(private mojaUsluga :APIService) {}
 
   usunItem() {
     if(this.przedmiot._id && this.przedmiot._rev) {
