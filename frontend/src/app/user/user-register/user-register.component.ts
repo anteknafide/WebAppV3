@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 
 //nwm dlaczego nie chce zimportowac, przez to przycisk "x" nie chce działać i trzeba zamykać przez przycisk rejestrowania
-import { toggleSignupDisplay } from '../../categories/categories.component';
+// import { toggleSignupDisplay } from '../../categories/categories.component';
 
 @Component({
   selector: 'app-user-register',

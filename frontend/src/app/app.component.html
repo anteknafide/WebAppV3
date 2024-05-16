@@ -4,17 +4,17 @@
 </div>
 -->
 
-<nav>
+<nav >
     <ng-template [ngIf] = "!(czyZalogowany$ | async)">
-      <a class="btn btn-primary" routerLink="/rejestracja">Rejestracja</a>
-      <a class="btn btn-primary" routerLink="/logowanie">Logowanie</a>
+      <a class="btn btn-primary" routerLink="/rejestracja" style="margin: 10px;">Rejestracja</a>
+      <a class="btn btn-primary" routerLink="/logowanie" style="margin: 10px;">Logowanie</a>
     </ng-template>
   
     <ng-template [ngIf]="(czyZalogowany$ | async)">
-      <a class="btn btn-primary" routerLink="/wylogowanie">Wyloguj</a>
+      <a class="btn btn-primary" routerLink="/wylogowanie" style="margin: 10px;">Wyloguj</a>
     </ng-template>
   
-    <a class="btn btn-primary" routerLink="/categories">Galeria</a>
+    <a class="btn btn-primary" routerLink="/categories" style="margin: 10px;">Sklep</a>
   </nav>
   
   <router-outlet></router-outlet>

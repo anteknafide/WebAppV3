@@ -6,21 +6,36 @@ import { APIService } from '../api.service';
 import { WypelnijKoszyk } from '../item/item.component';
 import { WyczyscKoszyk } from '../item/item.component';
 
+//Plan A
+// var isDisplayLogin:boolean = true;
+// var userLoggedIn=false;
 
-var isDisplayLogin:boolean = true;
-var isDisplaySignup:boolean = true;
+// export function LoggedIn(){
+//   userLoggedIn=true;
+//   isDisplayLogin = false;
+//   console.log(`Zmieniono display: ${isDisplayLogin}`);
+// }
 
-export function toggleLoginDisplay(){
-  console.log(isDisplayLogin);
-  isDisplayLogin = !isDisplayLogin;
-  console.log("Zmieniono display");
-  console.log(isDisplayLogin);
-  
+// export function LoggedOut(){
+//   isDisplayLogin = false;
+//   userLoggedIn=false;
+//   console.log(`Zmieniono display: ${isDisplayLogin}`);
+// }
+
+//Plan B
+export function LoggedIn(componentInstance: CategoriesComponent){
+  componentInstance.isDisplayLogin = false;
+  componentInstance.userLoggedIn=true;
+  console.log(`Zmieniono display: ${componentInstance.isDisplayLogin}`);
 }
 
-export function toggleSignupDisplay(){
-  isDisplaySignup = !isDisplaySignup;
+export function LoggedOut(componentInstance: CategoriesComponent){
+  componentInstance.isDisplayLogin = false;
+  componentInstance.userLoggedIn=false;
+  console.log(`Zmieniono display: ${componentInstance.isDisplayLogin}`);
 }
+
+
 
 @Component({
   selector: 'app-categories',
@@ -28,6 +43,11 @@ export function toggleSignupDisplay(){
   styleUrl: './categories.component.css'
 })
 export class CategoriesComponent {
+    public isDisplayLogin:boolean = true;
+    public isDisplaySignup:boolean = true;
+    public userLoggedIn=false;
+    public adminDisplay=false;
+
 
     items :Item[] = []
     nowyItem :Item = {
@@ -82,12 +102,7 @@ export class CategoriesComponent {
     )
   }
 
-    isDisplayLogin:boolean = true;
-    isDisplaySignup:boolean = true;
-
     isDisplayCheckout = true;
-    userLoggedIn=false;
-    adminDisplay=false;
     singupUsers :any[] = [];
     loginObj:any = {
       username: '',
@@ -126,43 +141,25 @@ export class CategoriesComponent {
 
   onLogin()
   {
-    // debugger
-    // console.log(this.singupUsers)
-      const userExist = this.singupUsers.find(m=>m.username==this.loginObj.username && m.password==this.loginObj.password)
-      if(userExist){
-        this.userLoggedIn=true;
-        alert('User logged(locked) in')
-        toggleLoginDisplay()
-      }else{
-        alert('Error')
-      }
+      //to nie działa, idk dlaczego
+      // const userExist = this.singupUsers.find(m=>m.username==this.loginObj.username && m.password==this.loginObj.password)
+      // if(userExist){
+      //   this.userLoggedIn=true;
+      //   alert('User logged(locked) in')
+      //   LoggedIn(this)
+      // }else{
+      //   alert('Error')
+      // }
+
+      LoggedIn(this)
   }
 
   onLogout(){
     alert('user logged out')
-    // localStorage.clear();
-    // this.loginObj={
-    //   username:'',
-    //   password:''
-    // }
-    this.userLoggedIn=false;
-    this.adminDisplay = false;
+    LoggedOut(this)
   }
   
   toggleAdminDisplay(){
     this.adminDisplay=!this.adminDisplay;
   }
-
-  //siNG up jaki noop to pisal??!!??!?!
-  onSingUp()
-  {
-    // this.signupObj=this.loginObj
-    // localStorage.setItem('singupUsers',JSON.stringify(this.singupUsers))
-    // this.signupObj={
-    //   username:'',
-    //   password:''
-    // }
-    // localStorage.clear();
-  }
-
 }
